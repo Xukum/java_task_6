@@ -16,4 +16,6 @@ public class TriangleContainer {
     public Point3D middleTrianglePoint;
     public double[] normal;
     public Color currentTriangleColor;
+    public double[] Kd;
+    public double[] Kf;
 }

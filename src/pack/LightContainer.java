@@ -1,12 +1,15 @@
 package pack;
 
+import java.awt.*;
+
 /**
  * Created with IntelliJ IDEA.
  * User: salerat
  * Date: 12/16/13
- * Time: 6:51 PM
+ * Time: 7:28 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NetModel {
-
+public class LightContainer {
+    public Point3D lightPosition;
+    public Color lightColor;
 }
