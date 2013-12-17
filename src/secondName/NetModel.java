@@ -66,8 +66,8 @@ public class NetModel {
         for (int i = 0; i<circles.length;i++){
 //            origin = new Point3D(segments[0].points[(int)Math.round(step*i)]);
             for (int j = 0; j<segments.length;j++){
-                if(step*i<segments[j].points.length) origin = new Point3D(segments[j].points[(int)Math.round(step*i)]);
-                else  origin = new Point3D(segments[j].points[segments[j].points.length-1]);
+                if(step*i<segments[j].points.length) origin = segments[j].points[(int)Math.round(step*i)];
+                else  origin = segments[j].points[segments[j].points.length-1];
                 origins.add(origin);
                 for (int z = 0; z<=k*2-1;z++){
                     circles[i].points[k*j + z] = MatrixArifmetikModel.RotateByX(origin,angle/k*z);
@@ -76,17 +76,28 @@ public class NetModel {
             }
         }
         TriangleContainer tc;
+        double[] kd = new double[3];
+        kd[0] = 100.1;
+        kd[1] = 100.1;
+        kd[2] = 100.1;
+
         for (int i = 0; i<origins.size() - segments.length-1;i++){
             tc = new TriangleContainer();
             tc.leftAnglePoint = origins.get(i);
-            tc.rightAnglePoint = origins.get(i+segments.length);
-            tc.middleTrianglePoint = origins.get(i+segments.length+1);
+            tc.rightAnglePoint =origins.get(i+segments.length);
+            tc.topAnglePoint = origins.get(i+segments.length+1);
+            tc.Kd = kd;
+            tc.Kf = kd;
+            tc.currentTriangleColor = new Color(125,125,125);
             triangleContainer.add(tc);
 
             tc = new TriangleContainer();
             tc.leftAnglePoint = origins.get(i);
             tc.rightAnglePoint = origins.get(i+1);
-            tc.middleTrianglePoint = origins.get(i+segments.length+1);
+            tc.topAnglePoint = origins.get(i+segments.length+1);
+            tc.Kd = kd;
+            tc.Kf = kd;
+            tc.currentTriangleColor = new Color(125,125,125);
             triangleContainer.add(tc);
         }
 //        for(int i = 0; i<circles.length; i++){

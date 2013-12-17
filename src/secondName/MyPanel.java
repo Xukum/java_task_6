@@ -116,26 +116,27 @@ public class MyPanel extends JPanel {
         ArrayList<TriangleContainer> tr = scene.convertToHalfSquareTriangle(camera);
         int offsety = getHeight()/4;
         int offsetx = getWidth()/2;
-        double scaleX = 1;
-        double scaleY = 1;
+        double scaleX = 5000;
+        double scaleY = 1000;
 
 
         int[] x = new int[3];
         int[] y = new int[3];
 
         for(TriangleContainer triangle : tr){
-            System.out.println(offsetx+triangle.middleTrianglePoint.x*scaleX + " " +
-                    offsety+triangle.middleTrianglePoint.y*scaleY+ " " + triangle.middleTrianglePoint.z);
+//            System.out.println(offsetx+triangle.topAnglePoint.x*scaleX + " " +
+//                    offsety+triangle.topAnglePoint.y*scaleY+ " " + triangle.topAnglePoint.z);
 
-            x[0] = (int)(offsetx+triangle.middleTrianglePoint.x*scaleX);
+            x[0] = (int)(offsetx+triangle.topAnglePoint.x*scaleX);
             x[1] = (int)(offsetx+triangle.leftAnglePoint.x*scaleX);
             x[2] = (int)(offsetx+triangle.rightAnglePoint.x*scaleX);
 
-            y[0] = (int)(offsety+triangle.middleTrianglePoint.y*scaleY);
+            y[0] = (int)(offsety+triangle.topAnglePoint.y*scaleY);
             y[1] = (int)(offsety+triangle.leftAnglePoint.y*scaleY);
             y[2] = (int)(offsety+triangle.rightAnglePoint.y*scaleY);
-
-            g.drawPolygon(x,y,x.length);
+            g.setColor(triangle.currentTriangleColor);
+//            System.out.println(triangle.currentTriangleColor.getGreen());
+            g.fillPolygon(x,y,x.length);
         }
 
 

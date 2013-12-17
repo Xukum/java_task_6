@@ -34,7 +34,7 @@ public class CalcColorModel {
 
         double Id[] = {triangleContainer.Kd[0] * cosTetta, triangleContainer.Kd[1] * cosTetta, triangleContainer.Kd[2] * cosTetta};
         double If[] = {triangleContainer.Kf[0] * cosAlfaN ,triangleContainer.Kf[1] * cosAlfaN, triangleContainer.Kf[2] * cosAlfaN};
-
+        System.out.println(Id[0]+" " +If[0]);
         return new Color((int)(Id[0] + If[0]),(int)(Id[1] + If[1]),(int)(Id[2] + If[2]));
     }
 }

@@ -8,6 +8,9 @@ package secondName;
  * To change this template use File | Settings | File Templates.
  */
 
+import pack.CalcColorModel;
+import pack.LightContainer;
+import pack.TriangleCalculModel;
 import pack.TriangleContainer;
 
 import java.awt.*;
@@ -63,19 +66,46 @@ public class SceneModel {
 
     public ArrayList<TriangleContainer> convertToHalfSquareTriangle(CameraContainer camera) {
 
-        ArrayList<SegmentModel> ret = getCopy();
-        ret = ConvertCam(ret,camera);
-        ret = MadeHalfSquere(ret,camera);
-        if(camera.isClipering) ret = Clipering(ret,camera);
+        ArrayList<TriangleContainer> ret = getCopyTriangle();
+        LightContainer[] lights = new LightContainer[1];
+        lights[0] = new LightContainer();
+        lights[0].lightColor = Color.green;
+        lights[0].lightPosition = new Point3D(100,100,100);
+//
+        ret = CalcData(ret);
+        ret = CalcColor(ret,camera,lights);
+        ret = ConvertCamTriangle(ret,camera);
+        ret = MadeHalfSquereTriangle(ret,camera);
+//        if(camera.isClipering) ret = Clipering(ret,camera);
 
-        ArrayList<TriangleContainer> trList = new ArrayList<TriangleContainer>();
-        for(NetModel nm : nets){
-            trList.addAll(nm.triangleContainer);
-        }
 
-        return trList;
+        return ret;
     }
 
+    private ArrayList<TriangleContainer> CalcData(ArrayList<TriangleContainer> ret) {
+        TriangleCalculModel tc = new TriangleCalculModel(null,null,null);
+        for (TriangleContainer tr:ret){
+            tc.point1 = tr.leftAnglePoint;
+            tc.point2 = tr.topAnglePoint;
+            tc.point3 = tr.rightAnglePoint;
+            tr.normal = tc.getNorm();
+        }
+
+        ret = tc.findMiddle(ret);
+        return ret;  //To change body of created methods use File | Settings | File Templates.
+    }
+
+    private ArrayList<TriangleContainer> CalcColor(ArrayList<TriangleContainer> ret, CameraContainer camera, LightContainer[] lights) {
+        CalcColorModel cc = new CalcColorModel();
+
+        for (LightContainer light:lights){
+            for (TriangleContainer tr:ret){
+                tr.currentTriangleColor =  cc.calcColor(tr,light,camera);
+            }
+        }
+
+        return ret;
+    }
 
 
     private ArrayList<SegmentModel> MadeHalfSquere(ArrayList<SegmentModel> ret,CameraContainer camera) {
@@ -83,6 +113,23 @@ public class SceneModel {
             for(Point3D p:sm.points){
                 p.x = p.x * 2 * camera.zn  / ( camera.sw * p.z);
                 p.y = p.y * 2 * camera.zn  / ( camera.sh * p.z);
+//                System.out.println(p.x + " " + p.y+ " " + p.z);
+//                p.x = (p.x+300) * 2 * camera.zn * 600 / ( camera.sw * (p.z+300));
+//                p.y = (p.y+300) * 2 * camera.zn * 600 / ( camera.sh * (p.z+300));
+                //p.z = 0;
+            }
+        }
+        return ret;
+    }
+
+    private ArrayList<TriangleContainer> MadeHalfSquereTriangle(ArrayList<TriangleContainer> ret,CameraContainer camera) {
+        for (TriangleContainer sm: ret){
+
+            for(Point3D p:sm.getAllPoints()){
+                if(p!=null){
+                    p.x = p.x * 2 * camera.zn  / ( camera.sw * p.z);
+                    p.y = p.y * 2 * camera.zn  / ( camera.sh * p.z);
+                }
 //                System.out.println(p.x + " " + p.y+ " " + p.z);
 //                p.x = (p.x+300) * 2 * camera.zn * 600 / ( camera.sw * (p.z+300));
 //                p.y = (p.y+300) * 2 * camera.zn * 600 / ( camera.sh * (p.z+300));
@@ -102,6 +149,17 @@ public class SceneModel {
 
             for (SegmentModel sm: net.circles){
                 ret.add(sm.getCopy());
+            }
+        }
+        return ret;
+    }
+
+    private ArrayList<TriangleContainer> getCopyTriangle() {
+        ArrayList<TriangleContainer> ret = new ArrayList<TriangleContainer>();
+
+        for (NetModel net: nets){
+            for (TriangleContainer tr: net.triangleContainer){
+                ret.add(tr.clone());
             }
         }
         return ret;
@@ -187,6 +245,23 @@ public class SceneModel {
                 point.y = point.x * camera.vNormal[0] + point.y * camera.vNormal[1] + point.z * camera.vNormal[2] + camera.distanseY;
                 point.z = point.x * camera.wNormal[0] + point.y * camera.wNormal[1] + point.z * camera.wNormal[2] + camera.distanseZ;
 //                System.out.println(point.x + " " + point.y+ " " + point.z);
+            }
+        }
+        return  ret;
+    }
+
+    public ArrayList<TriangleContainer> ConvertCamTriangle(ArrayList<TriangleContainer> ret,CameraContainer camera) {
+//        System.out.println(uNormal[0] + " " + uNormal[1] + " "+uNormal[2]+ " / " +vNormal[0] + " " + vNormal[1] + " "+vNormal[2]+" / "+wNormal[0] + " " + wNormal[1] + " "+wNormal[2]);
+        for (TriangleContainer sm: ret){
+            for (Point3D point: sm.getAllPoints()){
+                if(point!=null){
+                point.x = point.x * camera.uNormal[0] + point.y * camera.uNormal[1] + point.z * camera.uNormal[2] + camera.distanseX;
+                point.y = point.x * camera.vNormal[0] + point.y * camera.vNormal[1] + point.z * camera.vNormal[2] + camera.distanseY;
+                point.z = point.x * camera.wNormal[0] + point.y * camera.wNormal[1] + point.z * camera.wNormal[2] + camera.distanseZ;
+//                System.out.println(point.x + " " + point.y+ " " + point.z);
+
+                }
+
             }
         }
         return  ret;

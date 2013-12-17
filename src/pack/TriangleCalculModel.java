@@ -8,9 +8,9 @@ import secondName.Point3D;
  * To change this template use File | Settings | File Templates.
  */
 public class TriangleCalculModel {
-    Point3D point1;
-    Point3D point2;
-    Point3D point3;
+    public Point3D point1;
+    public Point3D point2;
+    public Point3D point3;
     double normalNorm[] = null;
 
     public TriangleCalculModel(Point3D point1, Point3D point2, Point3D point3) {
@@ -26,14 +26,17 @@ public class TriangleCalculModel {
         double normalLenth = Math.sqrt(normal[0] * normal[0] + normal[1] * normal[1] + normal[2] * normal[2]);
         double normalN[] = {normal[0]/normalLenth, normal[1]/normalLenth, normal[2]/normalLenth};
         normalNorm=normalN;
-        return normalN;
+        return normalN.clone();
     }
 
-    public java.util.List<TriangleContainer> findMiddle(java.util.List<TriangleContainer> triangleContainer) {
+    public java.util.ArrayList<TriangleContainer> findMiddle(java.util.ArrayList<TriangleContainer> triangleContainer) {
         for(TriangleContainer tr : triangleContainer)  {
-            double perimetr = Math.sqrt( (tr.leftAnglePoint.x - tr.topAnglePoint.x) * (tr.leftAnglePoint.x - tr.topAnglePoint.x) + (tr.leftAnglePoint.y - tr.topAnglePoint.y) * (tr.leftAnglePoint.y - tr.topAnglePoint.y) + (tr.leftAnglePoint.z - tr.topAnglePoint.z) * (tr.leftAnglePoint.z - tr.topAnglePoint.z))  +
+            tr.middleTrianglePoint = new Point3D(0,0,0);
+//            System.out.println(tr.topAnglePoint.x);
+            double perimetr = Math.sqrt( Math.pow(tr.leftAnglePoint.x - tr.topAnglePoint.x,2) +Math.pow(tr.leftAnglePoint.y - tr.topAnglePoint.y,2) +Math.pow(tr.leftAnglePoint.z - tr.topAnglePoint.z,2))  +
                     Math.sqrt( (tr.topAnglePoint.x - tr.rightAnglePoint.x)*(tr.topAnglePoint.x - tr.rightAnglePoint.x) + (tr.topAnglePoint.y - tr.rightAnglePoint.y) * (tr.topAnglePoint.y - tr.rightAnglePoint.y) + (tr.topAnglePoint.z - tr.rightAnglePoint.z)* (tr.topAnglePoint.z - tr.rightAnglePoint.z) ) +
                     Math.sqrt( (tr.leftAnglePoint.x - tr.rightAnglePoint.x)*(tr.leftAnglePoint.x - tr.rightAnglePoint.x) + (tr.leftAnglePoint.y - tr.rightAnglePoint.y) * (tr.leftAnglePoint.y - tr.rightAnglePoint.y) + (tr.leftAnglePoint.z - tr.rightAnglePoint.z) * (tr.leftAnglePoint.z - tr.rightAnglePoint.z));
+            System.out.println(perimetr);
             tr.middleTrianglePoint.x = (tr.leftAnglePoint.x + tr.topAnglePoint.x + tr.rightAnglePoint.x) /  perimetr;
             tr.middleTrianglePoint.y = (tr.leftAnglePoint.y + tr.topAnglePoint.y + tr.rightAnglePoint.y) /  perimetr;
             tr.middleTrianglePoint.z = (tr.leftAnglePoint.z + tr.topAnglePoint.z + tr.rightAnglePoint.z) /  perimetr;
