@@ -2,6 +2,8 @@ package secondName;
 
 
 
+import pack.TriangleContainer;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -111,24 +113,44 @@ public class MyPanel extends JPanel {
 
     public void DrawScene(Graphics g, SceneModel scene){
         ArrayList<SegmentModel> lines = scene.convertToHalfSquare(camera);
+        ArrayList<TriangleContainer> tr = scene.convertToHalfSquareTriangle(camera);
         int offsety = getHeight()/4;
         int offsetx = getWidth()/2;
-        double scaleX = 5000;
-        double scaleY = 2000;
+        double scaleX = 1;
+        double scaleY = 1;
 
 
+        int[] x = new int[3];
+        int[] y = new int[3];
 
-        for (SegmentModel sm: lines){
-            for (int i = 0; i<sm.points.length - 1;i++){
-                g.setColor(sm.color);
+        for(TriangleContainer triangle : tr){
+            System.out.println(offsetx+triangle.middleTrianglePoint.x*scaleX + " " +
+                    offsety+triangle.middleTrianglePoint.y*scaleY+ " " + triangle.middleTrianglePoint.z);
 
-                System.out.println(offsetx+sm.points[i].x*scaleX + " " + offsety+sm.points[i].y*scaleY+ " " + sm.points[i].z);
-                g.drawLine(offsetx+(int)(sm.points[i].x*scaleX),
-                        offsety+(int)(sm.points[i].y*scaleY),
-                        offsetx+(int)(sm.points[i+1].x*scaleX),
-                        offsety+ (int)(sm.points[i+1].y*scaleY));
-            }
+            x[0] = (int)(offsetx+triangle.middleTrianglePoint.x*scaleX);
+            x[1] = (int)(offsetx+triangle.leftAnglePoint.x*scaleX);
+            x[2] = (int)(offsetx+triangle.rightAnglePoint.x*scaleX);
+
+            y[0] = (int)(offsety+triangle.middleTrianglePoint.y*scaleY);
+            y[1] = (int)(offsety+triangle.leftAnglePoint.y*scaleY);
+            y[2] = (int)(offsety+triangle.rightAnglePoint.y*scaleY);
+
+            g.drawPolygon(x,y,x.length);
         }
+
+
+//        for (SegmentModel sm: lines){
+//            for (int i = 0; i<sm.points.length - 1;i++){
+//                g.setColor(sm.color);
+//
+//                System.out.println(offsetx+sm.points[i].x*scaleX + " " + offsety+sm.points[i].y*scaleY+ " " + sm.points[i].z);
+//                g.drawLine(offsetx+(int)(sm.points[i].x*scaleX),
+//                        offsety+(int)(sm.points[i].y*scaleY),
+//                        offsetx+(int)(sm.points[i+1].x*scaleX),
+//                        offsety+ (int)(sm.points[i+1].y*scaleY));
+//
+//            }
+//        }
     }
 }
 

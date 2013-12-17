@@ -4,6 +4,7 @@ package secondName;
 import pack.TriangleContainer;
 
 import java.awt.*;
+import java.awt.List;
 import java.util.*;
 
 /**
@@ -60,17 +61,33 @@ public class NetModel {
             sm.color = this.color;
         }
         Point3D origin;
+        ArrayList<Point3D> origins = new ArrayList<Point3D>();
         double cirStep = 2*Math.PI/circles[0].points.length;
         for (int i = 0; i<circles.length;i++){
 //            origin = new Point3D(segments[0].points[(int)Math.round(step*i)]);
             for (int j = 0; j<segments.length;j++){
                 if(step*i<segments[j].points.length) origin = new Point3D(segments[j].points[(int)Math.round(step*i)]);
                 else  origin = new Point3D(segments[j].points[segments[j].points.length-1]);
+                origins.add(origin);
                 for (int z = 0; z<=k*2-1;z++){
                     circles[i].points[k*j + z] = MatrixArifmetikModel.RotateByX(origin,angle/k*z);
                 }
 //                circles[i].points[j] = MatrixArifmetikModel.RotateByX(origin,cirStep*j);
             }
+        }
+        TriangleContainer tc;
+        for (int i = 0; i<origins.size() - segments.length-1;i++){
+            tc = new TriangleContainer();
+            tc.leftAnglePoint = origins.get(i);
+            tc.rightAnglePoint = origins.get(i+segments.length);
+            tc.middleTrianglePoint = origins.get(i+segments.length+1);
+            triangleContainer.add(tc);
+
+            tc = new TriangleContainer();
+            tc.leftAnglePoint = origins.get(i);
+            tc.rightAnglePoint = origins.get(i+1);
+            tc.middleTrianglePoint = origins.get(i+segments.length+1);
+            triangleContainer.add(tc);
         }
 //        for(int i = 0; i<circles.length; i++){
 //            for (int j = 0; j<circles[i].points.length; j++){

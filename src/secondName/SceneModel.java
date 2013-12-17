@@ -8,6 +8,8 @@ package secondName;
  * To change this template use File | Settings | File Templates.
  */
 
+import pack.TriangleContainer;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +60,23 @@ public class SceneModel {
 
         return ret;
     }
+
+    public ArrayList<TriangleContainer> convertToHalfSquareTriangle(CameraContainer camera) {
+
+        ArrayList<SegmentModel> ret = getCopy();
+        ret = ConvertCam(ret,camera);
+        ret = MadeHalfSquere(ret,camera);
+        if(camera.isClipering) ret = Clipering(ret,camera);
+
+        ArrayList<TriangleContainer> trList = new ArrayList<TriangleContainer>();
+        for(NetModel nm : nets){
+            trList.addAll(nm.triangleContainer);
+        }
+
+        return trList;
+    }
+
+
 
     private ArrayList<SegmentModel> MadeHalfSquere(ArrayList<SegmentModel> ret,CameraContainer camera) {
         for (SegmentModel sm: ret){
