@@ -33,7 +33,7 @@ public class CameraContainer {
         distanseX = Math.sqrt(distanse-this.c.x*this.c.x);
         distanseY = Math.sqrt(distanse-this.c.y*this.c.y);
         distanseZ = Math.sqrt(distanse-this.c.z*this.c.z);
-//        System.out.println(distanse+" " + camera.c.x*camera.c.x);
+//        //System.out.println(distanse+" " + camera.c.x*camera.c.x);
         double u[] = { this.c.x-this.u.x, this.c.y-this.u.y,this.c.z-this.u.z};
         double v[] = { this.c.x-this.v.x, this.c.y-this.v.y,this.c.z-this.v.z};
         double w[] = {u[1]*v[2] - u[2]*v[1], u[2]*v[0] - u[0]*v[2], u[0]*v[1]-u[1]*v[0]};
@@ -44,7 +44,7 @@ public class CameraContainer {
         double uNorm = Math.sqrt(u[0]*u[0]+u[1]*u[1]+u[2]*u[2]);
         double vNorm = Math.sqrt(vNew[0]*vNew[0]+vNew[1]*vNew[1]+vNew[2]*vNew[2]);
         double wNorm = Math.sqrt(w[0]*w[0]+w[1]*w[1]+w[2]*w[2]);
-        // System.out.println(wNorm);
+        // //System.out.println(wNorm);
         uNormal = new double[]{u[0] / uNorm, u[1] / uNorm, u[2] / uNorm};
         vNormal = new double[]{vNew[0]/vNorm, vNew[1]/vNorm, vNew[2]/vNorm};
         wNormal = new double[]{w[0]/wNorm, w[1]/wNorm, w[2]/wNorm};
@@ -71,7 +71,7 @@ public class CameraContainer {
 //            c.y += p.x/10;
 //            c.z += p.y/100;
 
-//            System.out.println(c.x + " " + c.y + " " + c.z);
+//            //System.out.println(c.x + " " + c.y + " " + c.z);
 //            MatrixArifmetikModel.RotateByX(c, 12);
 //            MatrixArifmetikModel.RotateByX(v, 1);
 //            MatrixArifmetikModel.RotateByX(u, 1);
@@ -96,7 +96,7 @@ public class CameraContainer {
         p.x = p.x/k;
         p.y = p.y/k;
         p.z = p.z/k;
-        System.out.println(p.z);
+        //System.out.println(p.z);
 
         Point3D vp = new Point3D(v[0],v[1],v[2]);
         MatrixArifmetikModel.MovePoint(vp,p);

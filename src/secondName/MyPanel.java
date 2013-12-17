@@ -62,11 +62,11 @@ public class MyPanel extends JPanel {
                 	Point3D p = new Point3D(clickP.x - e.getX(), clickP.y - e.getY(), 0);
                 	if(!isMove){
                         camera.Rotate(p);
-//                        System.out.println("rot");
+//                        //System.out.println("rot");
                     }
                     if(isMove){
                         camera.MoveCamera(p);
-//                        System.out.println("mov");
+//                        //System.out.println("mov");
                     }
                     clickP = new Point3D(e.getX(), e.getY(), 0);
                 	repaint();
@@ -77,7 +77,7 @@ public class MyPanel extends JPanel {
             @Override
             public void mouseWheelMoved(MouseWheelEvent e) {
                 camera.MoveCamera(new Point3D(0,0,e.getUnitsToScroll()));
-//                System.out.println(e.getUnitsToScroll());
+//                //System.out.println(e.getUnitsToScroll());
                 repaint();
             }
         });
@@ -96,7 +96,7 @@ public class MyPanel extends JPanel {
 //        for (int i = 0; i<net.segments.length;i++){
 //            sm = net.segments[i];
 //            for (int j = 0;j<net.segments[i].points.length-1;j++){
-//                System.out.println(sm.points[j].x + " " + sm.points[j].y+ " " + sm.points[j].z);
+//                //System.out.println(sm.points[j].x + " " + sm.points[j].y+ " " + sm.points[j].z);
 //                g.drawLine(offset+(int)sm.points[j].getX(),offset+(int)sm.points[j].getY(),
 //                        offset+(int)sm.points[j+1].getX(),offset+(int)sm.points[j+1].getY());
 //            }
@@ -104,7 +104,7 @@ public class MyPanel extends JPanel {
 //        for (int i = 0; i<net.circles.length;i++){
 //            sm = net.circles[i];
 //            for (int j = 0;j<net.circles[i].points.length-1;j++){
-//                System.out.println(sm.points[j].x + " " + sm.points[j].y+ " " + sm.points[j].z);
+//                //System.out.println(sm.points[j].x + " " + sm.points[j].y+ " " + sm.points[j].z);
 //                g.drawLine(offset+(int)sm.points[j].getX(),offset+(int)sm.points[j].getY(),
 //                        offset+(int)sm.points[j+1].getX(),offset+(int)sm.points[j+1].getY());
 //            }
@@ -124,7 +124,7 @@ public class MyPanel extends JPanel {
         int[] y = new int[3];
 
         for(TriangleContainer triangle : tr){
-//            System.out.println(offsetx+triangle.topAnglePoint.x*scaleX + " " +
+//            //System.out.println(offsetx+triangle.topAnglePoint.x*scaleX + " " +
 //                    offsety+triangle.topAnglePoint.y*scaleY+ " " + triangle.topAnglePoint.z);
 
             x[0] = (int)(offsetx+triangle.topAnglePoint.x*scaleX);
@@ -135,7 +135,7 @@ public class MyPanel extends JPanel {
             y[1] = (int)(offsety+triangle.leftAnglePoint.y*scaleY);
             y[2] = (int)(offsety+triangle.rightAnglePoint.y*scaleY);
             g.setColor(triangle.currentTriangleColor);
-//            System.out.println(triangle.currentTriangleColor.getGreen());
+//            //System.out.println(triangle.currentTriangleColor.getGreen());
             g.fillPolygon(x,y,x.length);
         }
 
@@ -144,7 +144,7 @@ public class MyPanel extends JPanel {
 //            for (int i = 0; i<sm.points.length - 1;i++){
 //                g.setColor(sm.color);
 //
-//                System.out.println(offsetx+sm.points[i].x*scaleX + " " + offsety+sm.points[i].y*scaleY+ " " + sm.points[i].z);
+//                //System.out.println(offsetx+sm.points[i].x*scaleX + " " + offsety+sm.points[i].y*scaleY+ " " + sm.points[i].z);
 //                g.drawLine(offsetx+(int)(sm.points[i].x*scaleX),
 //                        offsety+(int)(sm.points[i].y*scaleY),
 //                        offsetx+(int)(sm.points[i+1].x*scaleX),

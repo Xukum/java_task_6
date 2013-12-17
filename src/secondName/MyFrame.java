@@ -89,7 +89,7 @@ public class MyFrame extends JFrame {
         button.setToolTipText("show about");
         button.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
-                System.out.println(NumberNet.getText());
+                //System.out.println(NumberNet.getText());
                 SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
                         BSplineWIndow inst = new BSplineWIndow();

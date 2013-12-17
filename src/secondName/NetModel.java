@@ -77,9 +77,9 @@ public class NetModel {
         }
         TriangleContainer tc;
         double[] kd = new double[3];
-        kd[0] = 100.1;
-        kd[1] = 100.1;
-        kd[2] = 100.1;
+        kd[0] = 300.1;
+        kd[1] = 300.1;
+        kd[2] = 300.1;
 
         for (int i = 0; i<origins.size() - segments.length-1;i++){
             tc = new TriangleContainer();
@@ -146,7 +146,7 @@ public class NetModel {
                 if(minY>p.y) minY = p.y;
                 if(maxZ<p.z) maxZ = p.z;
                 if(minZ>p.z) minZ = p.z;
-                //System.out.println(p.x + " " + p.y +" " + p.z );
+                ////System.out.println(p.x + " " + p.y +" " + p.z );
             }
         }
         double xCoff = 1;
@@ -163,7 +163,7 @@ public class NetModel {
             p.x = (p.x - minX)*xCoff - 1;
             p.y = (p.y - minY)*yCoff - 1;
             p.z = (p.z - minZ)*zCoff + zAdd;
-//            System.out.println(p.x + " " + p.y +" " + p.z );
+//            //System.out.println(p.x + " " + p.y +" " + p.z );
         }
         }
         for (SegmentModel sm:circles ){
@@ -172,7 +172,7 @@ public class NetModel {
                 p.x = (p.x - minX)*xCoff - 1;
                 p.y = (p.y - minY)*yCoff - 1;
                 p.z = (p.z - minZ)*zCoff + zAdd;
-//            System.out.println(p.x + " " + p.y +" " + p.z );
+//            //System.out.println(p.x + " " + p.y +" " + p.z );
             }
         }
     }

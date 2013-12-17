@@ -84,11 +84,13 @@ public class SceneModel {
 
     private ArrayList<TriangleContainer> CalcData(ArrayList<TriangleContainer> ret) {
         TriangleCalculModel tc = new TriangleCalculModel(null,null,null);
-        for (TriangleContainer tr:ret){
+        for (TriangleContainer tr : ret){
             tc.point1 = tr.leftAnglePoint;
             tc.point2 = tr.topAnglePoint;
             tc.point3 = tr.rightAnglePoint;
             tr.normal = tc.getNorm();
+
+
         }
 
         ret = tc.findMiddle(ret);
@@ -113,7 +115,7 @@ public class SceneModel {
             for(Point3D p:sm.points){
                 p.x = p.x * 2 * camera.zn  / ( camera.sw * p.z);
                 p.y = p.y * 2 * camera.zn  / ( camera.sh * p.z);
-//                System.out.println(p.x + " " + p.y+ " " + p.z);
+//                //System.out.println(p.x + " " + p.y+ " " + p.z);
 //                p.x = (p.x+300) * 2 * camera.zn * 600 / ( camera.sw * (p.z+300));
 //                p.y = (p.y+300) * 2 * camera.zn * 600 / ( camera.sh * (p.z+300));
                 //p.z = 0;
@@ -130,7 +132,7 @@ public class SceneModel {
                     p.x = p.x * 2 * camera.zn  / ( camera.sw * p.z);
                     p.y = p.y * 2 * camera.zn  / ( camera.sh * p.z);
                 }
-//                System.out.println(p.x + " " + p.y+ " " + p.z);
+//                //System.out.println(p.x + " " + p.y+ " " + p.z);
 //                p.x = (p.x+300) * 2 * camera.zn * 600 / ( camera.sw * (p.z+300));
 //                p.y = (p.y+300) * 2 * camera.zn * 600 / ( camera.sh * (p.z+300));
                 //p.z = 0;
@@ -179,7 +181,7 @@ public class SceneModel {
             deleted = 0;
 
             for (int i = 0; i<sm.points.length; i++){
-//                System.out.println(sm.points[i].x + " " + sm.points[i].y+ " " + sm.points[i].z);
+//                //System.out.println(sm.points[i].x + " " + sm.points[i].y+ " " + sm.points[i].z);
 
                 if(sm.points[i].x<MinX || sm.points[i].x>MaxX){
                     sm.points[i] = null;
@@ -210,7 +212,7 @@ public class SceneModel {
             }
             sm.points = newPoints;
 //            for (Point3D p : newPoints){
-//                System.out.println(p.x + " " + p.y+ " " + p.z);
+//                //System.out.println(p.x + " " + p.y+ " " + p.z);
 //            }
 
         }
@@ -223,7 +225,7 @@ public class SceneModel {
 //        double distanseX = Math.sqrt(distanse-camera.c.x*camera.c.x);
 //        double distanseY = Math.sqrt(distanse-camera.c.y*camera.c.y);
 //        double distanseZ = Math.sqrt(distanse-camera.c.z*camera.c.z);
-////        System.out.println(distanse+" " + camera.c.x*camera.c.x);
+////        //System.out.println(distanse+" " + camera.c.x*camera.c.x);
 //        double u[] = { camera.c.x-camera.u.x, camera.c.y-camera.u.y,camera.c.z-camera.u.z};
 //        double v[] = { camera.c.x-camera.v.x, camera.c.y-camera.v.y,camera.c.z-camera.v.z};
 //        double w[] = {u[1]*v[2] - u[2]*v[1], u[2]*v[0] - u[0]*v[2], u[0]*v[1]-u[1]*v[0]};
@@ -234,31 +236,31 @@ public class SceneModel {
 //        double uNorm = Math.sqrt(u[0]*u[0]+u[1]*u[1]+u[2]*u[2]);
 //        double vNorm = Math.sqrt(vNew[0]*vNew[0]+vNew[1]*vNew[1]+vNew[2]*vNew[2]);
 //        double wNorm = Math.sqrt(w[0]*w[0]+w[1]*w[1]+w[2]*w[2]);
-//       // System.out.println(wNorm);
+//       // //System.out.println(wNorm);
 //        double uNormal[] = {u[0]/uNorm, u[1]/uNorm, u[2]/uNorm};
 //        double vNormal[] = {vNew[0]/vNorm, vNew[1]/vNorm, vNew[2]/vNorm};
 //        double wNormal[] = {w[0]/wNorm, w[1]/wNorm, w[2]/wNorm};
-//        System.out.println(uNormal[0] + " " + uNormal[1] + " "+uNormal[2]+ " / " +vNormal[0] + " " + vNormal[1] + " "+vNormal[2]+" / "+wNormal[0] + " " + wNormal[1] + " "+wNormal[2]);
+//        //System.out.println(uNormal[0] + " " + uNormal[1] + " "+uNormal[2]+ " / " +vNormal[0] + " " + vNormal[1] + " "+vNormal[2]+" / "+wNormal[0] + " " + wNormal[1] + " "+wNormal[2]);
         for (SegmentModel sm: ret){
             for (Point3D point: sm.points){
                 point.x = point.x * camera.uNormal[0] + point.y * camera.uNormal[1] + point.z * camera.uNormal[2] + camera.distanseX;
                 point.y = point.x * camera.vNormal[0] + point.y * camera.vNormal[1] + point.z * camera.vNormal[2] + camera.distanseY;
                 point.z = point.x * camera.wNormal[0] + point.y * camera.wNormal[1] + point.z * camera.wNormal[2] + camera.distanseZ;
-//                System.out.println(point.x + " " + point.y+ " " + point.z);
+//                //System.out.println(point.x + " " + point.y+ " " + point.z);
             }
         }
         return  ret;
     }
 
     public ArrayList<TriangleContainer> ConvertCamTriangle(ArrayList<TriangleContainer> ret,CameraContainer camera) {
-//        System.out.println(uNormal[0] + " " + uNormal[1] + " "+uNormal[2]+ " / " +vNormal[0] + " " + vNormal[1] + " "+vNormal[2]+" / "+wNormal[0] + " " + wNormal[1] + " "+wNormal[2]);
+//        //System.out.println(uNormal[0] + " " + uNormal[1] + " "+uNormal[2]+ " / " +vNormal[0] + " " + vNormal[1] + " "+vNormal[2]+" / "+wNormal[0] + " " + wNormal[1] + " "+wNormal[2]);
         for (TriangleContainer sm: ret){
             for (Point3D point: sm.getAllPoints()){
                 if(point!=null){
                 point.x = point.x * camera.uNormal[0] + point.y * camera.uNormal[1] + point.z * camera.uNormal[2] + camera.distanseX;
                 point.y = point.x * camera.vNormal[0] + point.y * camera.vNormal[1] + point.z * camera.vNormal[2] + camera.distanseY;
                 point.z = point.x * camera.wNormal[0] + point.y * camera.wNormal[1] + point.z * camera.wNormal[2] + camera.distanseZ;
-//                System.out.println(point.x + " " + point.y+ " " + point.z);
+//                //System.out.println(point.x + " " + point.y+ " " + point.z);
 
                 }
 

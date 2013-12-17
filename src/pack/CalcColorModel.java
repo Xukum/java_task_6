@@ -32,9 +32,24 @@ public class CalcColorModel {
         double cosTetta = (triangleContainer.normal[0] * L[0] + triangleContainer.normal[1] * L[1] + triangleContainer.normal[2] * L[2]) / (NLenth * LLenth);
         double cosAlfaN= Math.pow( (R[0] * L[0] + R[1] * L[1] + R[2] * L[2]) / (RLenth*VLenth ),n);
 
+        cosTetta=Math.abs(cosTetta);
+        cosAlfaN=Math.abs(cosAlfaN);
+
         double Id[] = {triangleContainer.Kd[0] * cosTetta, triangleContainer.Kd[1] * cosTetta, triangleContainer.Kd[2] * cosTetta};
         double If[] = {triangleContainer.Kf[0] * cosAlfaN ,triangleContainer.Kf[1] * cosAlfaN, triangleContainer.Kf[2] * cosAlfaN};
         System.out.println(Id[0]+" " +If[0]);
-        return new Color((int)(Id[0] + If[0]),(int)(Id[1] + If[1]),(int)(Id[2] + If[2]));
+
+        double ISumm[] =  {((triangleContainer.currentTriangleColor.getRed()) * (Id[0] + If[0])),((triangleContainer.currentTriangleColor.getGreen()) * (Id[1] + If[1])),((triangleContainer.currentTriangleColor.getBlue()) * (Id[2] + If[2]))};
+        int ISummInt[] = {(int)ISumm[0], (int)ISumm[1], (int)ISumm[2]};
+        if(ISumm[0] > 255 ) {
+            ISummInt[0] = 255;
+        }
+        if(ISumm[1] > 255 ) {
+            ISummInt[1] = 255;
+        }
+        if(ISumm[2] > 255 ) {
+            ISummInt[2] = 255;
+        }
+        return new Color(ISummInt[0],ISummInt[1],ISummInt[2]);
     }
 }

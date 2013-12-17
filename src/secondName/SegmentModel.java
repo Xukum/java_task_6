@@ -70,7 +70,7 @@ public class SegmentModel {
             if(minY>p.x) minY = p.y;
             if(maxZ<p.x) maxZ = p.z;
             if(minZ>p.x) minZ = p.z;
-            //System.out.println(p.x + " " + p.y +" " + p.z );
+            ////System.out.println(p.x + " " + p.y +" " + p.z );
         }
 
         double xCoff = 1;
@@ -86,8 +86,8 @@ public class SegmentModel {
             p.y = (p.y - minY)*yCoff - 1;
             p.z = (p.y + minZ)*zCoff;
 
-            System.out.println(p.x + " " + p.y +" " + p.z);
-            System.out.println(xCoff + " " +yCoff +" " +zCoff);
+            //System.out.println(p.x + " " + p.y +" " + p.z);
+            //System.out.println(xCoff + " " +yCoff +" " +zCoff);
         }
 
     }
