@@ -76,7 +76,7 @@ public class NetModel {
             }
         }
         TriangleContainer tc;
-        for (int i = 0; i<origins.size() - segments.length;i++){
+        for (int i = 0; i<origins.size() - segments.length-1;i++){
             tc = new TriangleContainer();
             tc.leftAnglePoint = origins.get(i);
             tc.rightAnglePoint = origins.get(i+segments.length);

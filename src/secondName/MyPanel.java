@@ -116,14 +116,17 @@ public class MyPanel extends JPanel {
         ArrayList<TriangleContainer> tr = scene.convertToHalfSquareTriangle(camera);
         int offsety = getHeight()/4;
         int offsetx = getWidth()/2;
-        double scaleX = 5000;
-        double scaleY = 2000;
+        double scaleX = 1;
+        double scaleY = 1;
 
 
         int[] x = new int[3];
         int[] y = new int[3];
 
         for(TriangleContainer triangle : tr){
+            System.out.println(offsetx+triangle.middleTrianglePoint.x*scaleX + " " +
+                    offsety+triangle.middleTrianglePoint.y*scaleY+ " " + triangle.middleTrianglePoint.z);
+
             x[0] = (int)(offsetx+triangle.middleTrianglePoint.x*scaleX);
             x[1] = (int)(offsetx+triangle.leftAnglePoint.x*scaleX);
             x[2] = (int)(offsetx+triangle.rightAnglePoint.x*scaleX);
