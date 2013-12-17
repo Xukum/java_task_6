@@ -201,11 +201,28 @@ public class MyFrame extends JFrame {
             Ok.addMouseListener(new MouseAdapter() {
                 public void mousePressed(MouseEvent e) {
                     jDialog1.setVisible(false);
+                    FileOperations fo = new FileOperations();
+                    fo.GetAllData();
+
+                    fo.n = Integer.parseInt(jTextField1.getText());
+                    fo.m = Integer.parseInt(jTextField2.getText());
+                    fo.k = Integer.parseInt(jTextField3.getText());
+                    fo.a = Integer.parseInt(jTextField4.getText());
+                    fo.b = Integer.parseInt(jTextField5.getText());
+                    fo.c = Integer.parseInt(jTextField6.getText());
+                    fo.zf = Integer.parseInt(jTextField7.getText());
+                    fo.sh = Integer.parseInt(jTextField8.getText());
+                    fo.zn = Integer.parseInt(jTextField9.getText());
+                    fo.sw = Integer.parseInt(jTextField10.getText());
+                    MyPanel.scene.nets.clear();
+                    fo.UpdateParams();
+
                 }
             });
         }
         return Ok;
     }
+
 
     private JTextField getJTextField1() {
         if(jTextField1 == null) {
