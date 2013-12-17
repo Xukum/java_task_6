@@ -1,5 +1,5 @@
 package pack;
-
+import secondName.Point3D;
 /**
  * Created with IntelliJ IDEA.
  * User: salerat

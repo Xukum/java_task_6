@@ -1,5 +1,7 @@
 package pack;
 
+import secondName.CameraContainer;
+
 import java.awt.*;
 
 /**
@@ -21,7 +23,6 @@ public class CalcColorModel {
         double V[] = {cameraContainer.c.x - triangleContainer.middleTrianglePoint.x, cameraContainer.c.y - triangleContainer.middleTrianglePoint.y, cameraContainer.c.z - triangleContainer.middleTrianglePoint.z};
         double VLenth =  (V[0] * V[0] + V[1] * V[1] + V[2] * V[2]);
 
-
         double NLenth = (triangleContainer.normal[0] * triangleContainer.normal[0] + triangleContainer.normal[1] * triangleContainer.normal[1] + triangleContainer.normal[2] * triangleContainer.normal[2]);
 
         double RCoef = 2*(LBack[0]*triangleContainer.normal[0] + LBack[1]*triangleContainer.normal[1] + LBack[2]*triangleContainer.normal[2]) / NLenth;
@@ -33,7 +34,6 @@ public class CalcColorModel {
 
         double Id[] = {triangleContainer.Kd[0] * cosTetta, triangleContainer.Kd[1] * cosTetta, triangleContainer.Kd[2] * cosTetta};
         double If[] = {triangleContainer.Kf[0] * cosAlfaN ,triangleContainer.Kf[1] * cosAlfaN, triangleContainer.Kf[2] * cosAlfaN};
-        //
 
         return new Color((int)(Id[0] + If[0]),(int)(Id[1] + If[1]),(int)(Id[2] + If[2]));
     }

@@ -1,5 +1,7 @@
 package pack;
 
+import secondName.Point3D;
+
 import java.awt.*;
 
 /**

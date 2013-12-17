@@ -1,4 +1,4 @@
-package pack;
+package secondName;
 
 
 
@@ -9,7 +9,7 @@ package pack;
  * Time: 3:07 PM
  * To change this template use File | Settings | File Templates.
  */
-class  Point3D {
+public class  Point3D {
     public double x;
     public double y;
     public double z;
@@ -18,6 +18,12 @@ class  Point3D {
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+
+    public Point3D(Point3D p){
+        this.x = p.x;
+        this.y = p.y;
+        this.z = p.z;
     }
 
     public double getX(){
